@@ -168,7 +168,7 @@ def oauth2callback():
         session['drive_credentials'] = credentials_to_dict(credentials)
         
         flash('התחברת בהצלחה ל-Google Drive!', 'success')
-        return redirect(url_for('transfer_files_auto'))
+        return redirect(url_for('start_transfer'))
 
     except Exception as e:
         flash(f'שגיאה בהשלמת האימות: {str(e)}', 'error')
