@@ -100,11 +100,17 @@ def test_connection():
     except Exception as e:
         return jsonify({'success': False, 'error': f'שגיאה כללית: {str(e)}'})
 
-@app.route('/authorize', methods=['POST'])
+@app.route('/authorize', methods=['GET', 'POST'])
+@app.route('/transfer', methods=['GET', 'POST'])
 def authorize():
     """Start OAuth authorization with provided credentials"""
     try:
-        # Store credentials in session
+        # Handle GET request - redirect to home page
+        if request.method == 'GET':
+            flash('אנא מלא את הטופס תחילה', 'warning')
+            return redirect(url_for('index'))
+        
+        # Store credentials in session (POST request)
         session['client_id'] = request.form.get('client_id', '').strip()
         session['client_secret'] = request.form.get('client_secret', '').strip()
         session['oauth_project_id'] = request.form.get('oauth_project_id', '').strip()
