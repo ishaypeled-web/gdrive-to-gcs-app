@@ -90,7 +90,7 @@ def test_connection():
 
         # Test OAuth configuration (just validate format)
         try:
-            redirect_uri = url_for('oauth2callback', _external=True)
+            redirect_uri = "https://gdrive-to-gcs-app-850086889211.us-central1.run.app/oauth2callback"
             flow = create_oauth_flow(client_id, client_secret, oauth_project_id, redirect_uri)
         except Exception as e:
             return jsonify({'success': False, 'error': f'שגיאה בהגדרות OAuth: {str(e)}'})
@@ -120,7 +120,7 @@ def authorize():
         session['drive_folder_id'] = request.form.get('drive_folder_id', '').strip()
 
         # Create OAuth flow
-        redirect_uri = url_for('oauth2callback', _external=True)
+        redirect_uri = "https://gdrive-to-gcs-app-850086889211.us-central1.run.app/oauth2callback"
         flow = create_oauth_flow(
             session['client_id'],
             session['client_secret'],
@@ -150,7 +150,7 @@ def oauth2callback():
             return redirect(url_for('index'))
 
         # Recreate flow
-        redirect_uri = url_for('oauth2callback', _external=True)
+        redirect_uri = "https://gdrive-to-gcs-app-850086889211.us-central1.run.app/oauth2callback"
         flow = create_oauth_flow(
             session['client_id'],
             session['client_secret'],
