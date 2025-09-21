@@ -166,7 +166,8 @@ def oauth2callback():
         # Store credentials
         credentials = flow.credentials
         session['drive_credentials'] = credentials_to_dict(credentials)
-        
+        @app.route('/start-transfer', methods=['POST'])
+
         flash('התחברת בהצלחה ל-Google Drive!', 'success')
         return redirect(url_for('transfer_files_auto'))
 
